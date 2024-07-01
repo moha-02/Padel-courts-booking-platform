@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* animacion loading bar */
+@keyframes pulse {
+  0%, 100% {
+    transform: scaleX(0.5);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+}
+
+.bg-padel-green.animate-pulse {
+  animation: pulse 1s infinite;
+}
+
+/* Animación modal ver reservas */
+.fade-out-enter {
+  opacity: 0;
+}
+.fade-out-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+.fade-out-exit {
+  opacity: 1;
+}
+.fade-out-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+/* MODAL EFFECT */
+.card-container {
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card .front,
+.card .back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+.modal-open .card-container {
+  animation: moveToCenter 1s forwards;
+}
+
+@keyframes moveToCenter {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(50%);
+  }
+}

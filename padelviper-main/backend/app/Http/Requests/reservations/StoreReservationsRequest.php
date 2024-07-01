@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Requests\reservations;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreReservationsRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'data.pistas_id' => 'required',
+            'data.user_id' => 'required',
+            'data.start_time' => 'required',
+            'data.end_time' => 'required|after:data.start_time',
+            'data.reservation_date' => 'required|date',
+            'data.price' => 'required|numeric'
+        ];
+    }
+}
